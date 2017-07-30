@@ -1,0 +1,10 @@
+library(plyr)
+
+permits = read.csv("permits_issued_datasd_mod.csv", header = TRUE, sep = ",")
+permits$issue_date = as.Date(permits$issue_date)
+year = as.numeric(format(permits$issue_date, '%Y'))
+type_counts = data.frame(ddply(permits,~approval_type + year,summarise,counts=length((approval_type))))
+type_counts_2015 = arrange(subset(type_counts, counts > 3000 & year == 2015)[,-2], desc(counts))
+type_counts_2016 = arrange(subset(type_counts, counts > 3000 & year == 2016)[,-2], desc(counts))
+write.csv(type_counts_2015, file = "pop_permits_2015.csv", row.names = FALSE)
+write.csv(type_counts_2016, file = "pop_permits_2016.csv", row.names = FALSE)

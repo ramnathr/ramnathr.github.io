@@ -20,9 +20,11 @@ permits_issued_datasd_mod.csv
 - Removed redundant headers
 - Removed columns "issued_by", "permit_holder", "scope", "status", "depiction", and "square_footage"
 - Reformatted date & time to remove times 
+- Removed '   �' substring from "Elec.-UG Program-City only   �" values in "approval_type" column
 
 solar_permits_issued_datasd_mod.csv
 - Merged solar_permits_issued_2015_datasd.csv and solar_permits_issued_2016_datasd.csv into one CSV
 - Rearranged columns so that 2015 and 2016 match
 - Removed redundant headers
 - Removed columns "approval_type", "approval_type_id", "scope", "first_inspection_date", "issued_by", "permit_holder", and "square_footage"
+- Reformatted date & time to remove times 
