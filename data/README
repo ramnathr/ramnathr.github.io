@@ -1,0 +1,28 @@
+----------------------------------
+Data Source
+----------------------------------
+Downloaded from 
+- https://data.sandiego.gov/datasets/permits-issued/
+- https://data.sandiego.gov/datasets/solar-permits/
+
+Downloaded Files
+- permits_issued_2015_datasd.csv
+- permits_issued_2016_datasd.csv
+- solar_permits_issued_2015_datasd.csv
+- solar_permits_issued_2016_datasd.csv
+
+
+----------------------------------
+Data Transformation
+----------------------------------
+permits_issued_datasd_mod.csv
+- Merged permits_issued_2015_datasd.csv and permits_issued_2016_datasd.csv into one CSV
+- Removed redundant headers
+- Removed columns "issued_by", "permit_holder", "scope", "status", "depiction", and "square_footage"
+- Reformatted date & time to remove times 
+
+solar_permits_issued_datasd_mod.csv
+- Merged solar_permits_issued_2015_datasd.csv and solar_permits_issued_2016_datasd.csv into one CSV
+- Rearranged columns so that 2015 and 2016 match
+- Removed redundant headers
+- Removed columns "approval_type", "approval_type_id", "scope", "first_inspection_date", "issued_by", "permit_holder", and "square_footage"
