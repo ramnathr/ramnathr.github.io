@@ -1,1 +1,333 @@
-Hello World
+<html>
+  <head>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/simple.css">
+
+    <style>
+      #chart_2015 {
+        height: 360px;
+        margin: 0 auto;
+        position: relative;
+        width: 500px;
+      }
+      #chart_2016 {
+        height: 360px;
+        margin: 0 auto;
+        position: relative;
+        width: 500px;
+      }
+      div.tooltip {
+        background: #eee;
+        box-shadow: 0 0 5px #999999;
+        color: #333;
+        display: none;
+        font-size: 14px;
+        left: 130px;
+        padding: 10px;
+        position: absolute;
+        text-align: center;
+        top: 95px;
+        width: 80px;
+        z-index: 10;
+      }
+      .legend {
+        font-size: 14px;
+      }
+      rect {
+        cursor: pointer;
+        stroke-width: 2;
+      }
+      rect.disabled {
+        fill: transparent !important;
+      }
+      h1 {
+        font-size: 14px;
+        text-align: center;
+      }
+      .button {
+        appearance: button;
+        text-decoration: none;
+        color: initial;
+      }
+      .reveal .footer {
+        position: absolute;
+        bottom: 5%;
+        left: 5%;
+        overflow:hidden;
+      }
+    </style>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+
+	<section id="intro">
+	  <h3>Introduction</h3>
+	  <h4>by Ramnath Ravindran</h4>
+
+	  <small>
+	    <p>This interactive slideshow is submitted in partial satisfaction of the requirements for the completion of CS 498 Data Visualization. It will show the breakdown of permits issued by the city of San Diego by various categories. In the interest of keeping the visualizations simple, only the most popular (more than three thousand) permit applications have been put on the pie chart.</p>
+
+	    <p>The data was gathered from the <a href="https://data.sandiego.gov/">San Diego Open Data Portal</a> and spans the years 2015 and 2016. This presentation aims to show that, in San Diego, there is great interest in solar power.</p>
+
+	    <p> Please use the right arrow key or the space bar to move forward through the slides. Use the left arrow key to move back. Use the button below to learn more about the visualization.
+	  </small>
+
+	  <p>
+	    <form action="#/3">
+	      <input type="submit" value="About this Visualization" />
+	    </form>
+	  </p>
+	</section>
+
+	<section id="slide_2015">
+	  <h3> Solar Permits Relative to Other Popular Permits in 2015 </h3>
+	  
+	  <div id="chart_2015"></div>
+	  <small>
+	    <p>This slide shows the various permits issued in 2015. The color scheme here is meant to highlight solar power. Moving your mouse around the various wedges will show you how many permits were issued and what percentage of the total each one comprises. As we can see, in 2015, solar permits are the most issued type of permit. This is consistent with San Diego's <a href="www.sandiegouniontribune.com/sdut-sandiego-solar-rankings-2016apr08-story.html">no. 2 ranking in the nation for solar installations.</a></p>
+	  </small>
+	</section>
+	
+	<section id="slide_2016">
+	  <h3> Solar Permits Relative to Other Popular Permits in 2016 </h3>
+	  <div id="chart_2016"></div>
+	  <small>
+	    <p>Continuing on to 2016, we see that solar still continues to be the most issued type of permit. We can see though, that it has gone down several hundred, year over year. You can follow along in 2017 by downloading the year to date data from <a href="https://data.sandiego.gov/datasets/solar-permits/">San Diego Open Data Portal</a> 
+	  </small>
+	</section>
+	
+	<section id="aboutme">
+	  <h3>About this Visualization</h3>
+
+	  <small>
+	    <p><b>Structure</b></p>
+	    <p>The project utilizes a interactive slideshow narrative as the structure. Each scene allows the user to mouse over a pie chart to gain more information about the number of solar permits issued in San Diego during 2015 and 2016</p>
+
+	    <p><b>Scenes</p></b>
+	    <p>The Javascript powering the slideshow is <a href="http://lab.hakim.se/reveal-js"><i>reveal.js</i></a>. Each scene is composed of a pie chart to focus on the proportion of solar permits vs the others. The choice to use a mouse over to display the information was mainly to satisfy the annotation portion of the project requirements. </p>
+
+	    <p><b>Annotations</p></b>
+	    <p>The tooltips in each scene make up the annotations. They show the total count, the permit label within the permit system  and the percentage of the total for that specific wedge.</p>
+
+	    <p><b>Parameters</p></b>
+	    <p>Unfortunately, no parameters have been added to modify a scene. There are parameters to navigate throught the slide show, but none that influence a scene beyond moving to a new one.</p>
+
+	    <p><b>Triggers</p></b>
+	    <p>The triggers used in this are mainly the navigation ones. Also, the moving the mouse over the pie chart yields information about that particular permit.</p>
+	  </small>
+	  <p>
+	    <form action="#/0">
+	      <input type="submit" value="Back to the Introduction" />
+	    </form>
+	  </p>
+
+	</section>
+	
+	<section>
+	  <h3> Resources/Links</h3>
+	  <small>
+	    <p> The following sites and links have been helpful in producing the JS you're experiencing:</p>
+	    <ul>
+	      <li><a href="https://bl.ocks.org/-/about">bl.ocks</a>: A great site that has a lot of examples, run by Mike Bostock, one of the key developers of d3.
+	      <li><a href="http://lab.hakim.se/reveal-js/#/">Reveal.js</a>: the Javascript that is enabling the slideshow navigation and presentation.
+	      <li><a href="http://zeroviscosity.com">zeroviscosity.com</a>: Provided the framework for creating the pie chart and the tooltips to go along with it.
+	</section>
+      </div>
+      
+    </div>
+    
+    <script src="js/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        width: "100%",
+	height: "100%",
+	margin: 0,
+	minScale: 1,
+	maxScale: 1
+      });
+    </script>
+
+    <script src="js/d3.v4.min.js"></script>
+    <script>
+      (function(d3) {
+        var width = 360;
+        var height = 400;
+        var radius = Math.min(width, height) / 2;
+        var legendRectSize = 18;
+        var legendSpacing = 4;
+
+        var color = d3.scaleOrdinal(["yellow", "steelblue"]);
+	
+        var svg = d3.select('#chart_2015')
+            .append('svg')
+            .attr('width', width + 200)
+            .attr('height', height)
+            .append('g')
+            .attr('transform', 'translate(' + (width / 2) +
+		  ',' + (height / 2) + ')');
+
+        var svg2 = d3.select('#chart_2016')
+            .append('svg')
+            .attr('width', width + 200)
+            .attr('height', height)
+            .append('g')
+            .attr('transform', 'translate(' + (width / 2) +
+		  ',' + (height / 2) + ')');
+	
+    
+        var arc = d3.arc()
+            .outerRadius(radius)
+	    .innerRadius(0);
+
+        var pie = d3.pie()
+            .value(function(d) { return d.counts; })
+            .sort(null);
+
+        var tooltip = d3.select('#chart_2015')
+            .append('div')
+            .attr('class', 'tooltip');
+
+        tooltip.append('div')
+            .attr('class', 'label');
+
+        tooltip.append('div')
+            .attr('class', 'count');
+
+        tooltip.append('div')
+            .attr('class', 'percent');
+
+        var tooltip2 = d3.select('#chart_2016')
+            .append('div')
+            .attr('class', 'tooltip');
+
+        tooltip2.append('div')
+            .attr('class', 'label');
+
+        tooltip2.append('div')
+            .attr('class', 'count');
+
+        tooltip2.append('div')
+            .attr('class', 'percent');
+
+	
+        d3.csv('data/pop_permits_2015.csv', function(error, dataset) {
+            dataset.forEach(function(d) {
+		d.counts = +d.counts;
+            });
+
+            var path = svg.selectAll('path')
+		.data(pie(dataset))
+		.enter()
+		.append('path')
+		.attr('d', arc)
+		.attr('fill', function(d, i) {
+		    color.domain(["Solar", "Other"]);		    
+		    return (d.data.approval_type.startsWith("Electrical-Photovoltaic") ? "yellow" : "steelblue");		})
+		.each(function(d) { this._current = d; });
+
+            path.on('mouseover', function(d) {
+ 		var total = d3.sum(dataset.map(function(d) {
+		    return d.counts;
+		}));
+		var percent = Math.round(1000 * d.data.counts / total) / 10;
+		tooltip.select('.label').html(d.data.approval_type);
+		tooltip.select('.count').html(d.data.counts);
+		tooltip.select('.percent').html(percent + '%');
+		tooltip.style('display', 'block');
+            });
+
+      
+            path.on('mouseout', function() {
+		tooltip.style('display', 'none');
+            });
+      
+            var legend = svg.selectAll('.legend')
+		.data(color.domain())
+		.enter()
+		.append('g')
+		.attr('class', 'legend')
+		.attr('transform', function(d, i) {
+		    var height = legendRectSize + legendSpacing;
+		    var offset =  height * color.domain().length / 2;
+		    var horz = -2 * legendRectSize + 300;
+		    var vert = i * height - offset;
+		    return 'translate(' + horz + ',' + vert + ')';
+		});
+
+            legend.append('rect')
+		.attr('width', legendRectSize)
+		.attr('height', legendRectSize)
+		.style('fill', color)
+		.style('stroke', color);
+	    
+            legend.append('text')
+		.attr('x', legendRectSize + legendSpacing)
+		.attr('y', legendRectSize - legendSpacing)
+		.text(function(d) { return d; });
+	    
+	});
+	
+	d3.csv('data/pop_permits_2016.csv', function(error, dataset) {
+	    dataset.forEach(function(d) {
+		d.counts = +d.counts;
+	    });
+
+	    var path = svg2.selectAll('path')
+		.data(pie(dataset))
+		.enter()
+		.append('path')
+		.attr('d', arc)
+		.attr('fill', function(d, i) {
+		    return (d.data.approval_type.startsWith("Electrical-Photovoltaic") ? "yellow" : "steelblue");		})
+		.each(function(d) { this._current = d; });
+
+	    path.on('mouseover', function(d) {
+		var total = d3.sum(dataset.map(function(d) {
+		    return d.counts;
+		}));
+		var percent = Math.round(1000 * d.data.counts / total) / 10;
+		tooltip2.select('.label').html(d.data.approval_type);
+		tooltip2.select('.count').html(d.data.counts);
+		tooltip2.select('.percent').html(percent + '%');
+		tooltip2.style('display', 'block');
+	    });
+
+	    path.on('mouseout', function() {
+		tooltip2.style('display', 'none');
+	    });
+
+      
+            var legend = svg2.selectAll('.legend')
+		.data(color.domain())
+		.enter()
+		.append('g')
+		.attr('class', 'legend')
+		.attr('transform', function(d, i) {
+		    var height = legendRectSize + legendSpacing;
+		    var offset =  height * color.domain().length / 2;
+		    var horz = -2 * legendRectSize + 300;
+		    var vert = i * height - offset;
+		    return 'translate(' + horz + ',' + vert + ')';
+		});
+
+            legend.append('rect')
+		.attr('width', legendRectSize)
+		.attr('height', legendRectSize)
+		.style('fill', color)
+		.style('stroke', color);
+	    
+            legend.append('text')
+		.attr('x', legendRectSize + legendSpacing)
+		.attr('y', legendRectSize - legendSpacing)
+		.text(function(d) { return d; });
+      
+	});
+
+    })(window.d3);
+    </script>
+
+  </body>
+</html>
